@@ -17,7 +17,7 @@ export class Profile {
   @Column('int')
   age: number;
 
-  @Column('text')
+  @Column('text', { nullable: true })
   experience?: string;
 
   @CreateDateColumn()
