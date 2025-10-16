@@ -8,9 +8,6 @@ export class Notify {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column('text', {nullable: true})
-  description: string;
-
   @Column('text')
   certificateImageUrl: string;
 

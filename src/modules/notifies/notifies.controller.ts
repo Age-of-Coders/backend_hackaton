@@ -8,12 +8,6 @@ import { ValidRoles } from '../auth/interfaces/valid-roles.interface';
 export class NotifiesController {
   constructor(private readonly notifiesService: NotifiesService) {}
 
-  @Post()
-  @Auth(ValidRoles.medic)
-  create(@Body() createNotifyDto: CreateNotifyDto) {
-    return this.notifiesService.create(createNotifyDto);
-  }
-
   @Get()
   @Auth(ValidRoles.admin)
   findAll() {

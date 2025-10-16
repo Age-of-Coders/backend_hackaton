@@ -10,6 +10,7 @@ import { ProfilesModule } from './modules/profiles/profiles.module';
 import { PostsModule } from './modules/posts/posts.module';
 import { NotifiesModule } from './modules/notifies/notifies.module';
 import { CloudinaryModule } from './providers/cloudinary/cloudinary.module';
+import { FilesModule } from './modules/files/files.module';
 
 @Module({
   imports: [
@@ -34,6 +35,7 @@ import { CloudinaryModule } from './providers/cloudinary/cloudinary.module';
     PostsModule,
     NotifiesModule,
     CloudinaryModule,
+    FilesModule,
   ],
   controllers: [],
   providers: [],

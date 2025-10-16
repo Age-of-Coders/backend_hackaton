@@ -15,7 +15,10 @@ export class NotifyTypeOrmRepository implements INotifyRepository {
   ) {}
 
   async send(data: CreateNotifyDto): Promise<Notify> {
-    const notify = this.repository.create(data);
+    const notify = this.repository.create({
+      certificateImageUrl: data.certificateImageUrl,
+      user: { id: data.userId } as any,
+    });
     return await this.repository.save(notify);
   }
   async findById(id: string): Promise<Notify | null> {

@@ -19,5 +19,6 @@ import { NotifyTypeOrmRepository } from './repositories/notify.typeorm.repositor
       useClass: NotifyTypeOrmRepository,
     }
   ],
+  exports: [NotifiesService],
 })
 export class NotifiesModule {}
