@@ -1,6 +1,7 @@
 import { Exclude } from "class-transformer";
+import { Notify } from "src/modules/notifies/entities/notify.entity";
 import { Profile } from "src/modules/profiles/entities/profile.entity";
-import { Column, CreateDateColumn, Entity, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity('users')
 export class User {
@@ -32,4 +33,7 @@ export class User {
 
   @OneToOne(() => Profile, profile => profile.user)
   profile: Profile;
+
+  @OneToMany(() => Notify, notify => notify.user)
+  notifyMedics: Notify[];
 }

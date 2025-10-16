@@ -24,7 +24,6 @@ export class ProfileTypeOrmRepository implements IProfileRepository {
       firstName: data.firstName,
       lastname: data.lastName,
       age: data.age,
-      experience: data.experience,
       user: { id: data.userId } as any,
       diabetes_types: { id: data.diabetesTypesId } as any,
     });
@@ -36,7 +35,6 @@ export class ProfileTypeOrmRepository implements IProfileRepository {
     if (data.firstName !== undefined) updateData.firstName = data.firstName;
     if (data.lastName !== undefined) updateData.lastname = data.lastName;
     if (data.age !== undefined) updateData.age = data.age;
-    if (data.experience !== undefined) updateData.experience = data.experience;
     await this.repository.update(id, updateData);
     return this.repository.findOneBy({ id });
   }

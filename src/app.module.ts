@@ -9,6 +9,7 @@ import { DiabetesModule } from './modules/diabetes/diabetes.module';
 import { ProfilesModule } from './modules/profiles/profiles.module';
 import { PostsModule } from './modules/posts/posts.module';
 import { NotifiesModule } from './modules/notifies/notifies.module';
+import { CloudinaryModule } from './providers/cloudinary/cloudinary.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { NotifiesModule } from './modules/notifies/notifies.module';
     ProfilesModule,
     PostsModule,
     NotifiesModule,
+    CloudinaryModule,
   ],
   controllers: [],
   providers: [],
