@@ -84,5 +84,22 @@ export const initialData: SeedData = {
     { username: 'nuria_ibl', email: 'nuria.ibl@example.com', password: bcrypt.hashSync(process.env.USER_PASSWORD!!, 10), roles: ['user'] },
     { username: 'ismael_contr', email: 'ismael.contr@example.com', password: bcrypt.hashSync(process.env.USER_PASSWORD!!, 10), roles: ['user'] },
     { username: 'yasmin_delgado', email: 'yasmin.delgado@example.com', password: bcrypt.hashSync(process.env.USER_PASSWORD!!, 10), roles: ['user'] }
+  ],
+diabetes: [
+  { 
+    type: 'Diabetes Tipo 1', 
+    description: 'Es una enfermedad autoinmune crónica en la que el sistema inmunológico destruye las células beta del páncreas responsables de producir insulina. Como resultado, el cuerpo produce poca o ninguna insulina, lo que impide que la glucosa entre en las células para obtener energía. Suele diagnosticarse en la infancia o adolescencia, y requiere insulina de por vida.' 
+  },
+  { 
+    type: 'Diabetes type 2', 
+    description: 'Es una enfermedad metabólica crónica en la que el cuerpo se vuelve resistente a la insulina o no produce suficiente cantidad para mantener los niveles de glucosa normales. Es el tipo más común de diabetes y se asocia con factores como el sobrepeso, la mala alimentación, la falta de ejercicio y la predisposición genética. Puede controlarse con cambios en el estilo de vida, medicación oral y, en algunos casos, insulina.' 
+  },
+  { 
+    type: 'Diabetes Gestacional', 
+    description: 'Es un tipo de diabetes que se desarrolla durante el embarazo, generalmente en el segundo o tercer trimestre. Ocurre cuando las hormonas del embarazo provocan resistencia a la insulina, aumentando los niveles de glucosa en sangre. Aunque suele desaparecer después del parto, incrementa el riesgo de desarrollar diabetes tipo 2 en el futuro, tanto en la madre como en el hijo.' 
+  }
+],
+  profiles: [
+    
   ]
 }

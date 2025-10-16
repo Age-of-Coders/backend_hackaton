@@ -5,6 +5,11 @@ import { UsersModule } from './modules/users/users.module';
 import { ConfigModule } from '@nestjs/config';
 import { envsValidationSchema } from './config/validation.schema';
 import { SeedModule } from './modules/seed/seed.module';
+import { DiabetesModule } from './modules/diabetes/diabetes.module';
+import { ProfilesModule } from './modules/profiles/profiles.module';
+import { PostsModule } from './modules/posts/posts.module';
+import { CommentsModule } from './modules/comments/comments.module';
+import { NotifiesModule } from './modules/notifies/notifies.module';
 
 @Module({
   imports: [
@@ -24,6 +29,11 @@ import { SeedModule } from './modules/seed/seed.module';
     AuthModule,
     UsersModule,
     SeedModule,
+    DiabetesModule,
+    ProfilesModule,
+    PostsModule,
+    CommentsModule,
+    NotifiesModule,
   ],
   controllers: [],
   providers: [],
