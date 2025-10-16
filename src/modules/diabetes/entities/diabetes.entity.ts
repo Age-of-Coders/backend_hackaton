@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Profile } from "src/modules/profiles/entities/profile.entity";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('diabetes_types')
 export class Diabetes {
@@ -10,4 +11,7 @@ export class Diabetes {
 
   @Column('text')
   description: string;
+
+  @ManyToOne(() => Profile, profile => profile.diabetes_types)
+  profiles: Profile[];
 }

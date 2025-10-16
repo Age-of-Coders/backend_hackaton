@@ -1,26 +1,26 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { CreateProfileDto } from './dto/create-profile.dto';
 import { UpdateProfileDto } from './dto/update-profile.dto';
+import { IProfileRepository } from './repositories/profile.repository.interface';
 
 @Injectable()
 export class ProfilesService {
+
+  constructor(
+    @Inject('IProfileRepository')
+    private readonly profileRepository: IProfileRepository,
+  ) {}
+
+  findOne(id: string) {
+    return this.profileRepository.findById(id);
+  }
+
   create(createProfileDto: CreateProfileDto) {
-    return 'This action adds a new profile';
+    return this.profileRepository.create(createProfileDto);
   }
 
-  findAll() {
-    return `This action returns all profiles`;
+  update(id: string, updateProfileDto: UpdateProfileDto) {
+    return this.profileRepository.update(id, updateProfileDto);
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} profile`;
-  }
-
-  update(id: number, updateProfileDto: UpdateProfileDto) {
-    return `This action updates a #${id} profile`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} profile`;
-  }
 }

@@ -1,34 +1,36 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, HttpStatus } from '@nestjs/common';
 import { ProfilesService } from './profiles.service';
 import { CreateProfileDto } from './dto/create-profile.dto';
 import { UpdateProfileDto } from './dto/update-profile.dto';
+import { Auth } from '../auth/decorators/auth.decorator';
 
 @Controller('profiles')
 export class ProfilesController {
   constructor(private readonly profilesService: ProfilesService) {}
 
-  @Post()
-  create(@Body() createProfileDto: CreateProfileDto) {
-    return this.profilesService.create(createProfileDto);
-  }
+  @Post('create-profile')
+  @Auth()
+  @HttpCode(HttpStatus.CREATED)
+  async create(@Body() createProfileDto: CreateProfileDto) {
 
-  @Get()
-  findAll() {
-    return this.profilesService.findAll();
+    try {
+      return await this.profilesService.create(createProfileDto);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   @Get(':id')
+  @Auth()
+  @HttpCode(HttpStatus.OK)
   findOne(@Param('id') id: string) {
-    return this.profilesService.findOne(+id);
+    return this.profilesService.findOne(id);
   }
 
   @Patch(':id')
+  @Auth()
+  @HttpCode(HttpStatus.OK)
   update(@Param('id') id: string, @Body() updateProfileDto: UpdateProfileDto) {
-    return this.profilesService.update(+id, updateProfileDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.profilesService.remove(+id);
+    return this.profilesService.update(id, updateProfileDto);
   }
 }
