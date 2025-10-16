@@ -8,7 +8,6 @@ import { SeedModule } from './modules/seed/seed.module';
 import { DiabetesModule } from './modules/diabetes/diabetes.module';
 import { ProfilesModule } from './modules/profiles/profiles.module';
 import { PostsModule } from './modules/posts/posts.module';
-import { CommentsModule } from './modules/comments/comments.module';
 import { NotifiesModule } from './modules/notifies/notifies.module';
 
 @Module({
@@ -32,7 +31,6 @@ import { NotifiesModule } from './modules/notifies/notifies.module';
     DiabetesModule,
     ProfilesModule,
     PostsModule,
-    CommentsModule,
     NotifiesModule,
   ],
   controllers: [],
