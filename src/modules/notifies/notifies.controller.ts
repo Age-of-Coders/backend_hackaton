@@ -1,34 +1,40 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Put } from '@nestjs/common';
 import { NotifiesService } from './notifies.service';
 import { CreateNotifyDto } from './dto/create-notify.dto';
-import { UpdateNotifyDto } from './dto/update-notify.dto';
+import { Auth } from '../auth/decorators/auth.decorator';
+import { ValidRoles } from '../auth/interfaces/valid-roles.interface';
 
 @Controller('notifies')
 export class NotifiesController {
   constructor(private readonly notifiesService: NotifiesService) {}
 
   @Post()
+  @Auth(ValidRoles.medic)
   create(@Body() createNotifyDto: CreateNotifyDto) {
     return this.notifiesService.create(createNotifyDto);
   }
 
   @Get()
+  @Auth(ValidRoles.admin)
   findAll() {
     return this.notifiesService.findAll();
   }
 
   @Get(':id')
+  @Auth(ValidRoles.admin)
   findOne(@Param('id') id: string) {
-    return this.notifiesService.findOne(+id);
+    return this.notifiesService.findOne(id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateNotifyDto: UpdateNotifyDto) {
-    return this.notifiesService.update(+id, updateNotifyDto);
+  @Put(':id')
+  @Auth(ValidRoles.admin)
+  validate(@Param('id') id: string) {
+    return this.notifiesService.validate(id);
   }
 
   @Delete(':id')
+  @Auth(ValidRoles.admin)
   remove(@Param('id') id: string) {
-    return this.notifiesService.remove(+id);
+    return this.notifiesService.remove(id);
   }
 }

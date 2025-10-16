@@ -1,26 +1,32 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { CreateNotifyDto } from './dto/create-notify.dto';
-import { UpdateNotifyDto } from './dto/update-notify.dto';
+import { INotifyRepository } from './repositories/notify.repository.interface';
 
 @Injectable()
 export class NotifiesService {
+
+  constructor(
+    @Inject('INotifyRepository')
+    private readonly notifyRepository: INotifyRepository
+  ) {}
+
   create(createNotifyDto: CreateNotifyDto) {
-    return 'This action adds a new notify';
+    return this.notifyRepository.send(createNotifyDto);
   }
 
   findAll() {
-    return `This action returns all notifies`;
+    return this.notifyRepository.findAll();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} notify`;
+  findOne(id: string) {
+    return this.notifyRepository.findById(id)
   }
 
-  update(id: number, updateNotifyDto: UpdateNotifyDto) {
-    return `This action updates a #${id} notify`;
+  validate(id: string) {
+    return this.notifyRepository.validate(id);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} notify`;
+  remove(id: string) {
+    return this.notifyRepository.reject(id);
   }
 }

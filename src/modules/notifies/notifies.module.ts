@@ -4,6 +4,7 @@ import { NotifiesController } from './notifies.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Notify } from './entities/notify.entity';
 import { PassportModule } from '@nestjs/passport';
+import { NotifyTypeOrmRepository } from './repositories/notify.typeorm.repository';
 
 @Module({
   imports: [
@@ -11,6 +12,12 @@ import { PassportModule } from '@nestjs/passport';
     PassportModule.register({ defaultStrategy: 'jwt' }),
 ],
   controllers: [NotifiesController],
-  providers: [NotifiesService],
+  providers: [
+    NotifiesService,
+    {
+      provide: 'INotifyRepository',
+      useClass: NotifyTypeOrmRepository,
+    }
+  ],
 })
 export class NotifiesModule {}
