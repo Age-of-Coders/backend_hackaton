@@ -3,5 +3,5 @@ export class AuthResponseDto {
   name: string;
   email: string;
   accessToken: string;
-
+  roles: string[];
 }

@@ -4,7 +4,7 @@ import { CreateNotifyDto } from './dto/create-notify.dto';
 import { Auth } from '../auth/decorators/auth.decorator';
 import { ValidRoles } from '../auth/interfaces/valid-roles.interface';
 
-@Controller('notifies')
+@Controller('validate-medic')
 export class NotifiesController {
   constructor(private readonly notifiesService: NotifiesService) {}
 

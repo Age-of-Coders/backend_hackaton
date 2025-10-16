@@ -16,7 +16,9 @@ export class AuthController {
     @Body() registerDto: RegisterDto,
     @Res({ passthrough: true }) res: Response,
   ): Promise<AuthResponseDto> {
-    const { accessToken, id, name, email } = await this.authService.register(registerDto);
+
+    try {
+      const { accessToken, id, name, email, roles } = await this.authService.register(registerDto);
 
     const cookieOptions = {
       httpOnly: true,
@@ -32,7 +34,12 @@ export class AuthController {
       name,
       email,
       accessToken,
+      roles
     };
+  } catch (error) {
+      console.log(error);
+      throw new InternalServerErrorException('Error interno del servidor');
+    }
   }
 
 
@@ -42,7 +49,7 @@ export class AuthController {
     @Body() loginUserDto: LoginUserDto,
     @Res({ passthrough: true }) res: Response,
   ): Promise<AuthResponseDto> {
-    const { accessToken, id, name, email } = await this.authService.login(loginUserDto);
+    const { accessToken, id, name, email, roles } = await this.authService.login(loginUserDto);
 
     res.cookie('auth_token', accessToken, {
       httpOnly: true,
@@ -56,6 +63,7 @@ export class AuthController {
       name,
       email,
       accessToken,
+      roles
     };
   }
 

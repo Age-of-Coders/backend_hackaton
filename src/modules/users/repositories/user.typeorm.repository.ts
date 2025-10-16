@@ -16,7 +16,11 @@ export class UserTypeOrmRepository implements IUserRepository {
   ) {}
 
   async create(data: CreateUserDto): Promise<User> {
-    const user = this.repository.create(data);
+    const { role, ...userData } = data;
+    const user = this.repository.create({
+      ...userData,
+      roles: [role],
+    });
     user.password = await this.bcrypt.hash(data.password)
     return this.repository.save(user);
   }

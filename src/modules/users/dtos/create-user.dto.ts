@@ -17,4 +17,8 @@ export class CreateUserDto {
     message: STRONG_PASSWORD.StrongPasswordMessage,
   })
   password: string;
+
+  @IsString({ each: true })
+  @IsNotEmpty()
+  role: string;
 }
