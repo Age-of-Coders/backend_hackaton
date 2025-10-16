@@ -8,7 +8,7 @@ import { JwtGuard } from './guards/jwt.guard';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(private readonly authService: AuthService) { }
 
   @Post('register')
   @HttpCode(HttpStatus.CREATED)
@@ -17,8 +17,7 @@ export class AuthController {
     @Res({ passthrough: true }) res: Response,
   ): Promise<AuthResponseDto> {
 
-    try {
-      const { accessToken, id, name, email, roles } = await this.authService.register(registerDto);
+    const { accessToken, id, name, email, roles } = await this.authService.register(registerDto);
 
     const cookieOptions = {
       httpOnly: true,
@@ -29,17 +28,13 @@ export class AuthController {
 
     res.cookie('auth_token', accessToken, cookieOptions);
 
-    return { 
+    return {
       id,
       name,
       email,
       accessToken,
       roles
     };
-  } catch (error) {
-      console.log(error);
-      throw new InternalServerErrorException('Error interno del servidor');
-    }
   }
 
 
@@ -84,7 +79,7 @@ export class AuthController {
 
     const payload = { id: user.id, email: user.email, username: user.username, roles: user.roles };
 
-    const accessToken = await this.authService.getJwt(payload); 
+    const accessToken = await this.authService.getJwt(payload);
 
     res.cookie('auth_token', accessToken, {
       httpOnly: true,
@@ -97,7 +92,7 @@ export class AuthController {
       id: user.id,
       name: user.username,
       email: user.email,
-      accessToken 
+      accessToken
     };
   }
 }

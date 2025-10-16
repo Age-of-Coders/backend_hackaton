@@ -1,5 +1,7 @@
+
 import { Exclude } from "class-transformer";
 import { Notify } from "src/modules/notifies/entities/notify.entity";
+import { Post } from "src/modules/posts/entities/post.entity";
 import { Profile } from "src/modules/profiles/entities/profile.entity";
 import { Column, CreateDateColumn, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
@@ -36,4 +38,7 @@ export class User {
 
   @OneToMany(() => Notify, notify => notify.user)
   notifyMedics: Notify[];
+
+  @OneToMany(() => Post, post => post.userId)
+  posts: Post[];
 }
