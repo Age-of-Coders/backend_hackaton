@@ -16,9 +16,9 @@ export class HistoryTypeOrmRepository {
     private readonly userRepository: Repository<User>,
   ) {}
 
-  async findAllSimple(): Promise<{ created_at: Date; texto_historia: string; likes: number }[]> {
+  async findAllSimple(): Promise<{ id: string; created_at: Date; texto_historia: string; likes: number }[]> {
     return await this.historyRepository.find({
-      select: ['created_at', 'texto_historia', 'likes'],
+      select: ['id', 'created_at', 'texto_historia', 'likes'],
       order: { created_at: 'DESC' }
     });
   }
