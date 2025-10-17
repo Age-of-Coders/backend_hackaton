@@ -1,4 +1,4 @@
-import { Controller, Body, Patch, Param, UseGuards, Post, Delete } from '@nestjs/common';
+import { Controller, Body, Patch, Param, UseGuards, Post, Delete, Get } from '@nestjs/common';
 import { HistoriesService } from './histories.service';
 import { JwtGuard } from '../auth/guards/jwt.guard';
 import { GetUser } from '../auth/decorators/get-user.decorator';
@@ -23,5 +23,28 @@ export class HistoriesController {
     @GetUser() user: JwtPayload
   ) {
     return this.historiesService.removeLike(id, user.id);
+  }
+
+  @Post(':id/favorite')
+  addFavorite(
+    @Param('id') id: string,
+    @GetUser() user: JwtPayload
+  ) {
+    return this.historiesService.addFavorite(user.id, id);
+  }
+
+  @Delete(':id/favorite')
+  removeFavorite(
+    @Param('id') id: string,
+    @GetUser() user: JwtPayload
+  ) {
+    return this.historiesService.removeFavorite(user.id, id);
+  }
+
+  @Get('favorites/me')
+  listFavorites(
+    @GetUser() user: JwtPayload
+  ) {
+    return this.historiesService.listFavorites(user.id);
   }
 }

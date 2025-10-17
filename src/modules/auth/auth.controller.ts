@@ -77,7 +77,7 @@ export class AuthController {
     @Res({ passthrough: true }) res: Response
   ) {
 
-    const payload = { id: user.id, email: user.email, username: user.username, roles: user.roles };
+    const payload = { id: user.id, email: user.email, username: user.username, roles: user.roles, isMedic: user.isMedic };
 
     const accessToken = await this.authService.getJwt(payload);
 
@@ -92,6 +92,8 @@ export class AuthController {
       id: user.id,
       name: user.username,
       email: user.email,
+      roles: user.roles,
+      isMedic: user.isMedic,
       accessToken
     };
   }

@@ -11,7 +11,7 @@ import { JwtPayload } from '../auth/interfaces/jwt-payload.interface';
 @UseGuards(JwtGuard)
 @Controller('posts')
 export class PostsController {
-  constructor(private readonly postsService: PostsService) {}
+  constructor(private readonly postsService: PostsService) { }
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
@@ -44,25 +44,53 @@ export class PostsController {
     return this.postsService.remove(id);
   }
 
-  @Post(':id/like')
+  @Post('like/:id')
   @HttpCode(HttpStatus.OK)
   addLike(
     @Param('id') id: string,
     @GetUser() user: JwtPayload
   ) {
-    try {
-      return this.postsService.addLike(id, user.id);
-    } catch (error) {
-      console.error('Error adding like:', error);
-    }
+
+    return this.postsService.addLike(id, user.id);
+
   }
 
-  @Delete(':id/like')
+  @Delete('like/:id')
   @HttpCode(HttpStatus.OK)
   removeLike(
     @Param('id') id: string,
     @GetUser() user: JwtPayload
   ) {
     return this.postsService.removeLike(id, user.id);
+  }
+
+  @Post('favorite/:id')
+  @HttpCode(HttpStatus.OK)
+  async addFavorite(
+    @Param('id') id: string,
+    @GetUser() user: JwtPayload
+  ) {
+
+    const result = await this.postsService.addFavorite(user.id, id);
+    if (!result) {
+      throw new Error('No se pudo agregar a favoritos. Verifica que el post exista.');
+    }
+    return result;
+
+  }
+
+  @Delete('favorite/:id')
+  removeFavorite(
+    @Param('id') id: string,
+    @GetUser() user: JwtPayload
+  ) {
+    return this.postsService.removeFavorite(user.id, id);
+  }
+
+  @Get('favorites/me')
+  listFavorites(
+    @GetUser() user: JwtPayload
+  ) {
+    return this.postsService.listFavorites(user.id);
   }
 }
