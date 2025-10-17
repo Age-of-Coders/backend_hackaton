@@ -8,5 +8,9 @@ export class CreatePostDto {
 
   @IsString()
   @IsNotEmpty()
+  description: string;
+
+  @IsString()
+  @IsNotEmpty()
   userId: string;
 }

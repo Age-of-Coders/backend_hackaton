@@ -10,6 +10,9 @@ export class Post {
   @Column('text')
   text: string;
 
+  @Column('text', { nullable: true })
+  description: string;
+
   @Column('int', { default: 0 })
   likes: number;
 
