@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, PrimaryColumn, OneToMany } from "typeorm";
+import { HistoryLike } from "./history-like.entity";
 
 @Entity('historias_usuarios')
 export class History {
@@ -16,4 +17,7 @@ export class History {
 
   @Column('int8', { default: 0 })
   likes: number;
+
+  @OneToMany(() => HistoryLike, historyLike => historyLike.history)
+  historyLikes: HistoryLike[];
 }

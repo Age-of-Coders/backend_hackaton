@@ -1,6 +1,5 @@
 import { Controller, Get, Post, Body, Param, Delete, Put } from '@nestjs/common';
 import { NotifiesService } from './notifies.service';
-import { CreateNotifyDto } from './dto/create-notify.dto';
 import { Auth } from '../auth/decorators/auth.decorator';
 import { ValidRoles } from '../auth/interfaces/valid-roles.interface';
 
