@@ -36,10 +36,11 @@ export class NotifyTypeOrmRepository implements INotifyRepository {
 
     if (!notify || !notify.user) return false;
 
-
     await this.repository.update(id, { isVerified: true });
 
     await this.userRepository.update(notify.user.id, { isMedic: true });
+
+    await this.repository.delete({ id });
 
     return true;
   }
