@@ -5,6 +5,8 @@ import { UpdatePostDto } from './dto/update-post.dto';
 import { Auth } from '../auth/decorators/auth.decorator';
 import { ValidRoles } from '../auth/interfaces/valid-roles.interface';
 import { JwtGuard } from '../auth/guards/jwt.guard';
+import { GetUser } from '../auth/decorators/get-user.decorator';
+import { JwtPayload } from '../auth/interfaces/jwt-payload.interface';
 
 @UseGuards(JwtGuard)
 @Controller('posts')
@@ -40,5 +42,27 @@ export class PostsController {
   @HttpCode(HttpStatus.NO_CONTENT)
   remove(@Param('id') id: string) {
     return this.postsService.remove(id);
+  }
+
+  @Post(':id/like')
+  @HttpCode(HttpStatus.OK)
+  addLike(
+    @Param('id') id: string,
+    @GetUser() user: JwtPayload
+  ) {
+    try {
+      return this.postsService.addLike(id, user.id);
+    } catch (error) {
+      console.error('Error adding like:', error);
+    }
+  }
+
+  @Delete(':id/like')
+  @HttpCode(HttpStatus.OK)
+  removeLike(
+    @Param('id') id: string,
+    @GetUser() user: JwtPayload
+  ) {
+    return this.postsService.removeLike(id, user.id);
   }
 }

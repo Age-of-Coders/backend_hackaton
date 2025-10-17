@@ -5,10 +5,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { PassportModule } from '@nestjs/passport';
 import { PostTypeOrmRepository } from './repositories/post.typeorm.repository';
 import { Post } from './entities/post.entity';
+import { PostLike } from './entities/post-like.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Post]),
+    TypeOrmModule.forFeature([Post, PostLike]),
     PassportModule.register({ defaultStrategy: 'jwt' }),
   ],
   controllers: [PostsController],

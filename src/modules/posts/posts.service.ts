@@ -30,4 +30,12 @@ export class PostsService {
   remove(id: string) {
     return this.postRepository.delete(id);
   }
+
+  addLike(postId: string, userId: string) {
+    return this.postRepository.addLike(postId, userId);
+  }
+
+  removeLike(postId: string, userId: string) {
+    return this.postRepository.removeLike(postId, userId);
+  }
 }

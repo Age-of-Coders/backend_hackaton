@@ -9,4 +9,6 @@ export interface IPostRepository {
   findById(id: string): Promise<Post | null>;
   update(id: string, data: UpdatePostDto): Promise<Post | null>;
   delete(id: string): Promise<void>;
+  addLike(id: string, userId: string): Promise<Post | null>;
+  removeLike(id: string, userId: string): Promise<Post | null>;
 }
