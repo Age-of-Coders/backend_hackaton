@@ -4,6 +4,7 @@ import { Notify } from "../entities/notify.entity";
 import { Repository } from 'typeorm';
 import { INotifyRepository } from "./notify.repository.interface";
 import { CreateNotifyDto } from "../dto/create-notify.dto";
+import { User } from "src/modules/users/entities/user.entity";
 
 
 @Injectable()
@@ -12,6 +13,8 @@ export class NotifyTypeOrmRepository implements INotifyRepository {
   constructor(
     @InjectRepository(Notify)
     private readonly repository: Repository<Notify>,
+    @InjectRepository(User)
+    private readonly userRepository: Repository<User>,
   ) {}
 
   async send(data: CreateNotifyDto): Promise<Notify> {
@@ -26,7 +29,17 @@ export class NotifyTypeOrmRepository implements INotifyRepository {
     return notify;
   }
   async validate(id: string): Promise<boolean> {
+    const notify = await this.repository.findOne({ 
+      where: { id },
+      relations: ['user']
+    });
+
+    if (!notify || !notify.user) return false;
+
+
     await this.repository.update(id, { isVerified: true });
+
+    await this.userRepository.update(notify.user.id, { isMedic: true });
 
     return true;
   }

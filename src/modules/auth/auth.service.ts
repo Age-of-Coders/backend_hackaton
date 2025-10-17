@@ -25,7 +25,7 @@ export class AuthService {
 
     if (!user) throw new BadRequestException('Error al registar al usuario');
 
-    const payload = { sub: user.id, username: user.username, email: user.email, roles: user.roles };
+    const payload: JwtPayload = { id: user.id, username: user.username, email: user.email, roles: user.roles };
 
     const token = this.jwtService.sign(payload);
 
@@ -46,7 +46,7 @@ export class AuthService {
 
     if (!user || !isValidPassword) throw new BadRequestException('Credenciales incorrectas');
 
-    const payload = { sub: user.id, username: user.username, email: user.email, roles: user.roles };
+    const payload: JwtPayload = { id: user.id, username: user.username, email: user.email, roles: user.roles };
 
     return { 
       accessToken: this.jwtService.sign(payload),

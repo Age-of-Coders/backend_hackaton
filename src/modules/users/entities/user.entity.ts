@@ -24,8 +24,8 @@ export class User {
   @Column('text', { array: true, default: ['user'] })
   roles: string[];
 
-  @Column('boolean', { default: true })
-  isActive: boolean;
+  @Column('boolean', { default: false })
+  isMedic: boolean;
 
   @CreateDateColumn()
   createdAt: Date;
