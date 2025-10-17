@@ -13,6 +13,10 @@ export class HistoriesService {
     private readonly favoriteHistoryRepository: FavoriteHistoryTypeOrmRepository,
   ) {}
 
+  findAllSimple() {
+    return this.historyRepository.findAllSimple();
+  }
+
   addLike(historyId: string, userId: string) {
     return this.historyRepository.addLike(historyId, userId);
   }

@@ -9,6 +9,11 @@ import { JwtPayload } from '../auth/interfaces/jwt-payload.interface';
 export class HistoriesController {
   constructor(private readonly historiesService: HistoriesService) {}
 
+  @Get('')
+  findAllSimple() {
+    return this.historiesService.findAllSimple();
+  }
+
   @Post(':id/like')
   addLike(
     @Param('id') id: string,
