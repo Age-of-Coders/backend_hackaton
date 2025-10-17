@@ -10,6 +10,7 @@ import { FavoritePost } from './entities/favorite-post.entity';
 import { FavoritePostTypeOrmRepository } from './repositories/favorite-post.typeorm.repository';
 import { User } from '../users/entities/user.entity';
 import { UsersModule } from '../users/users.module';
+import { MedicVerifiedGuard } from '../auth/guards/medic-verified.guard';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { UsersModule } from '../users/users.module';
     PostsService,
     PostTypeOrmRepository,
     FavoritePostTypeOrmRepository,
+    MedicVerifiedGuard,
     {
       provide: 'IPostRepository',
       useClass: PostTypeOrmRepository,

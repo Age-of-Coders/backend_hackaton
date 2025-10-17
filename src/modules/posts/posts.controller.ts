@@ -4,6 +4,7 @@ import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 import { Auth } from '../auth/decorators/auth.decorator';
 import { ValidRoles } from '../auth/interfaces/valid-roles.interface';
+import { MedicVerifiedGuard } from '../auth/guards/medic-verified.guard';
 import { JwtGuard } from '../auth/guards/jwt.guard';
 import { GetUser } from '../auth/decorators/get-user.decorator';
 import { JwtPayload } from '../auth/interfaces/jwt-payload.interface';
@@ -15,7 +16,7 @@ export class PostsController {
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
-  @Auth(ValidRoles.medic, ValidRoles.admin)
+  @UseGuards(MedicVerifiedGuard)
   create(@Body() createPostDto: CreatePostDto) {
     return this.postsService.create(createPostDto);
   }
